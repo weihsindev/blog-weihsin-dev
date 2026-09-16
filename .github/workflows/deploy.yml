@@ -33,7 +33,11 @@ jobs:
       # ci 而不是 install:完全照 package-lock,不會在 CI 裡悄悄升版。
       - run: npm ci
 
+      - run: npm test
+
       - run: npm run build
+
+      - run: npm run check:site
 
       # 排隊或手動重跑的舊版本不得覆蓋 main 的新版。
       - name: Check latest main commit
@@ -52,7 +56,7 @@ jobs:
           node --input-type=module -e 'import { writeFileSync } from "node:fs"; writeFileSync("dist/version.json", JSON.stringify({ commit: process.env.GITHUB_SHA }) + "\n");'
 
       # 用 package-lock 鎖定的 wrangler，不另外裝一個 action，
-      # 這樣本機 npm run deploy 和 CI 跑的是同一個版本。
+      # 正式發布統一由這個 workflow 執行。
       - run: npx wrangler deploy
         if: steps.latest.outputs.deploy == 'true'
         env:
@@ -78,3 +82,7 @@ jobs:
           done
           echo "::error::Live deployment does not match $GITHUB_SHA"
           exit 1
+
+      - name: Check live homepage and articles
+        if: steps.latest.outputs.deploy == 'true'
+        run: npm run check:site -- https://blog.weihsin.dev

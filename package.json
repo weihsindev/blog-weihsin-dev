@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
+    "test": "node --test scripts/*.test.mjs",
     "build": "astro build",
     "preview": "astro preview",
-    "deploy": "npm run build && wrangler deploy"
+    "check:site": "node scripts/check-site.mjs"
   },
   "dependencies": {
     "astro": "^7.3.1"

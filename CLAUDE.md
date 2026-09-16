@@ -26,6 +26,8 @@
 
 ## 技術
 
+- **正式發布只走 GitHub Actions** (`.github/workflows/deploy.yml`)。本機用 `npm run dev`
+  或 `npm run preview` 預覽，不直接執行 `wrangler deploy`。操作方式見 `README.md`。
 - **`wrangler.jsonc` 的 `name` 是 Cloudflare Worker 的身分**，不是專案名稱。
   改掉再部署會建立新的 Worker，舊的仍綁著網域繼續服務 → 部署顯示成功但線上不更新。
 - **網域宣告在 `wrangler.jsonc` 的 `routes` 裡**，不要只掛在 dashboard。
