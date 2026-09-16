@@ -1,0 +1,122 @@
+/* 設計 token 與 weihsin-dev 的 resume.css 同源,刻意複製而不抽共用套件。
+   三個站各自獨立,一個站改版不該牽動另外兩個。 */
+:root {
+  --bg: #f2f2f0;
+  --ink: #131313;
+  --ink-2: #4c4c48;
+  --ink-3: #7c7c76;
+  --rule: #c9c9c4;
+  --rule-soft: #dededa;
+  --accent: #d8341f;
+
+  --sans: 'Archivo', 'PingFang TC', 'Noto Sans TC', system-ui, sans-serif;
+  --mono: 'Space Mono', ui-monospace, SFMono-Regular, monospace;
+
+  --rail: 132px;
+  --gutter: 44px;
+  --measure: 640px;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-feature-settings: 'tnum' 1;
+  line-height: 1.6;
+}
+
+a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent); }
+a:hover { color: #a5240f; border-bottom-color: #a5240f; }
+
+.page { width: 100%; max-width: 900px; margin: 0 auto; }
+
+.row {
+  display: grid;
+  grid-template-columns: var(--rail) minmax(0, 1fr);
+  border-bottom: 1px solid var(--rule);
+}
+.row:last-child { border-bottom: 0; }
+
+.rail { padding: 32px 0 32px var(--gutter); }
+.rail-num {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--ink-3);
+}
+.body { padding: 32px var(--gutter) 32px 0; }
+
+/* 頁首 */
+.topbar { border-bottom: 2px solid var(--ink); }
+.topbar .rail, .topbar .body { padding-top: 12px; padding-bottom: 12px; }
+.topbar .rail {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+}
+.topbar .body { font-family: var(--mono); font-size: 11px; color: var(--ink-3); }
+
+/* 文章列表 */
+.post-list { list-style: none; margin: 0; padding: 0; }
+.post-list li { padding: 0 0 24px; }
+.post-list li:last-child { padding-bottom: 0; }
+.post-date {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--ink-3);
+  display: block;
+  margin-bottom: 4px;
+}
+.post-title { font-size: 19px; font-weight: 600; margin: 0 0 4px; line-height: 1.35; }
+.post-title a { color: var(--ink); border-bottom-color: var(--rule); }
+.post-title a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+.post-summary { margin: 0; color: var(--ink-2); font-size: 15px; max-width: var(--measure); }
+
+.empty { color: var(--ink-3); font-size: 15px; max-width: var(--measure); margin: 0; }
+
+/* 單篇文章 */
+.article-title { font-size: 28px; font-weight: 700; margin: 0 0 8px; line-height: 1.25; }
+.prose { max-width: var(--measure); color: var(--ink); }
+.prose h2 { font-size: 19px; font-weight: 600; margin: 32px 0 8px; }
+.prose h3 { font-size: 16px; font-weight: 600; margin: 24px 0 8px; }
+.prose p { margin: 0 0 16px; }
+.prose ul, .prose ol { margin: 0 0 16px; padding-left: 20px; }
+.prose li { margin-bottom: 4px; }
+.prose blockquote {
+  margin: 0 0 16px;
+  padding-left: 16px;
+  border-left: 2px solid var(--rule);
+  color: var(--ink-2);
+}
+.prose code {
+  font-family: var(--mono);
+  font-size: 13px;
+  background: var(--rule-soft);
+  padding: 1px 4px;
+}
+.prose pre {
+  font-family: var(--mono);
+  font-size: 13px;
+  padding: 16px;
+  overflow-x: auto;
+  background: #fff;
+  border: 1px solid var(--rule);
+}
+.prose pre code { background: none; padding: 0; }
+.prose table { border-collapse: collapse; width: 100%; margin: 0 0 16px; font-size: 14px; }
+.prose th, .prose td { border-bottom: 1px solid var(--rule); padding: 6px 8px; text-align: left; }
+.prose img { max-width: 100%; height: auto; }
+
+@media (max-width: 680px) {
+  :root { --rail: 0px; --gutter: 20px; }
+  .row { grid-template-columns: 1fr; }
+  .rail { padding: 20px var(--gutter) 0; }
+  .body { padding: 8px var(--gutter) 24px; }
+  .topbar .rail { padding-bottom: 0; }
+}
